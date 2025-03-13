@@ -5,7 +5,7 @@ import sys
 from telegram import Update, Bot
 from telegram.ext import Application, CommandHandler
 from config import TOKEN, CHAT_ID, MIN_INTERVAL, MAX_INTERVAL
-from messages import generate_messages
+from messages import generate_random_message
 from telegram.error import TelegramError
 
 # Configure logging
@@ -21,7 +21,7 @@ async def send_messages():
     """Send messages at random intervals."""
     while True:
         try:
-            message = generate_messages()
+            message = generate_random_message()
             await bot.send_message(chat_id=CHAT_ID, text=message)
             logging.info(f"Sent message:\n{message}")
             await asyncio.sleep(random.randint(MIN_INTERVAL, MAX_INTERVAL))
